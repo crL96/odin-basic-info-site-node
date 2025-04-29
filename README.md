@@ -21,4 +21,4 @@ Preview the website: node index.js
 ## Technologies Used
 Programming Language: Javascript
 
-Server-side Tool: NodeJS
+Server-side Tools: NodeJS & Express

@@ -1,37 +1,26 @@
-import http from "node:http";
-import fs from "node:fs";
-import url from "node:url";
+const fs = require("node:fs");
+const express = require("express");
 
-const server = http.createServer((req, res) => {
-    
-    const query = url.parse(req.url, true);
-    let filename = "./index.html";
+const app = express();
 
-    switch (query.pathname) {
-        case "/":
-            filename = "./index.html";
-            break;
-        case "/about":
-            filename = "./about.html";
-            break;
-        case "/contact-me":
-            filename = "./contact-me.html";
-            break;
-        default:
-            filename = "./404.html"
-            break; 
-    }
-    
-    fs.readFile(filename, (error, data) => {
+const PORT = 3000;
+app.listen(PORT, () => {
+    console.log("Server has started")
+});
 
-        if (error) {
-            res.writeHead(404, { "Content-Type": "text/html" })
-            return res.end("404 Not Found")
-        }
+//Routes
+app.get("/", (req, res) => {
+    res.sendFile("./index.html", { root: __dirname });
+});
 
-        res.writeHead(200, { "Content-Type": "text/html" });
-        res.write(data);
-        return res.end()
-    });
+app.get("/about", (req, res) => {
+    res.sendFile("./about.html", { root: __dirname });
+});
 
-}).listen(8080);
+app.get("/contact-me", (req, res) => {
+    res.sendFile("./contact-me.html", { root: __dirname });
+});
+
+app.use((req, res) => {
+    res.sendFile("./404.html", { root: __dirname });
+});
