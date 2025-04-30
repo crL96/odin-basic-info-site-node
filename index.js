@@ -1,4 +1,3 @@
-const fs = require("node:fs");
 const express = require("express");
 
 const app = express();
