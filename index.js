@@ -20,6 +20,6 @@ app.get("/contact-me", (req, res) => {
     res.sendFile("./contact-me.html", { root: __dirname });
 });
 
-app.use((req, res) => {
+app.get("/{*splat}",(req, res) => {
     res.sendFile("./404.html", { root: __dirname });
 });
