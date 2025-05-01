@@ -7,6 +7,8 @@ app.listen(PORT, () => {
     console.log(`Server has started on port ${PORT}`)
 });
 
+app.use(express.static("public"));
+
 //Routes
 app.get("/", (req, res) => {
     res.sendFile("./index.html", { root: __dirname });
